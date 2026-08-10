@@ -46,7 +46,7 @@ echo -e "${GRE}Installed dependencies successfully.${RES}\n"
 echo -e "${CYAN}Downloading aghues... ${RES}"
 TMP_DIR=$(mktemp -d)
 
-if ! wget 'https://ggg.nairi.education/db/get?id=1ed8dc57-f49c-4b5e-acbe-7196c98f421f-93cb734c-09b2-42bb-99c7-b68cefd5bd71' -O "${TMP_DIR}/aghues.gz"; then
+if ! wget 'https://github.com/ArtikciNarek2006/aghues-installation/releases/download/aghues_1.4.4/aghues.gz' -O "${TMP_DIR}/aghues.gz"; then
   echo -e "${RED}ERROR: Downloading failed. Please check connection.${RES}"
   rm -rf "${TMP_DIR}"
   exit 1
