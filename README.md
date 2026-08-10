@@ -34,3 +34,13 @@ sudo apt update && sudo apt install -y wget curl \
 cd /Applications/aghues_1.4.4/aghues
 CFLAGS="-O2 -Wno-error=int-conversion -Wno-error=implicit-function-declaration -fpermissive" ./install.sh
 ```
+
+## Manual Uninstalation guide
+- Run following
+```bash
+cd ~/Applications/aghues_1.4.4/aghues
+CFLAGS="-O2 -Wno-error=int-conversion -Wno-error=implicit-function-declaration -fpermissive" ./install.sh -m
+```
+> - It will open install menu
+> - Read and continue from there the uninstaltion
+- After uninstalling remove Applications folder leftover `rm -rf ~/Applications/aghues_1.4.4`
