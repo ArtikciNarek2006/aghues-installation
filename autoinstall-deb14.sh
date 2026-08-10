@@ -67,12 +67,28 @@ echo -e "${GRE}Extracted successfully.${RES}"
 
 echo "Build/Install ..."
 if [ -d "${AGH_ROOT}/aghues" ]; then
-  cd "${AGH_ROOT}/aghues"
-  if ! CFLAGS="-O2 -Wno-error=int-conversion -Wno-error=implicit-function-declaration -fpermissive" ./install.sh; then
+  cd "${AGH_ROOT}/aghues" || exit 1
+
+  # Define the CFLAGS prefix
+  BUILD_ENV='CFLAGS="-O2 -Wno-error=int-conversion -Wno-error=implicit-function-declaration -fpermissive"'
+
+  if sudo -n true 2>/dev/null || [ -t 0 ]; then
+    # Terminal or cached sudo session
+    sudo env ${BUILD_ENV} ./install.sh "$@"
+  elif command -v pkexec >/dev/null 2>&1; then
+    # Graphical prompt fallback
+    pkexec sh -c "${BUILD_ENV} ./install.sh \"\$@\"" _ "$@"
+  else
+    echo -e "${RED}ERROR: Neither sudo nor pkexec available.${RES}"
+    exit 1
+  fi
+
+  if [ $? -ne 0 ]; then
     echo -e "${RED}ERROR: Build failed.${RES}"
     rm -rf "${AGH_ROOT}"
     exit 1
   fi
+
   echo -e "${GRE}Build finished successfully!${RES}"
 else
   echo -e "${RED}ERROR: Directory ${AGH_ROOT}/aghues not found after extraction.${RES}"
