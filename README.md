@@ -2,7 +2,7 @@
 
 ## Fast run script
 ```bash
-curl -fsSL https://github.com/ArtikciNarek2006/aghues-installation/auto_install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ArtikciNarek2006/aghues-installation/refs/heads/main/autoinstall.sh | bash
 ```
 > curl needed `sudo apt update && sudo apt install -y curl`
 
